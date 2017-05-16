@@ -8,9 +8,6 @@ namespace IMDB.list_file_Converter
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
