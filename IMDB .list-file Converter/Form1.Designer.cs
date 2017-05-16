@@ -211,9 +211,8 @@
             this.browseFolderLabel.AutoSize = true;
             this.browseFolderLabel.Location = new System.Drawing.Point(7, 20);
             this.browseFolderLabel.Name = "browseFolderLabel";
-            this.browseFolderLabel.Size = new System.Drawing.Size(35, 13);
+            this.browseFolderLabel.Size = new System.Drawing.Size(0, 13);
             this.browseFolderLabel.TabIndex = 2;
-            this.browseFolderLabel.Text = "label2";
             // 
             // startButton
             // 

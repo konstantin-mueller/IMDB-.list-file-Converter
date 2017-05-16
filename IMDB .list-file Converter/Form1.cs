@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IMDB.list_file_Converter
@@ -14,6 +7,7 @@ namespace IMDB.list_file_Converter
     public partial class Form1 : Form {
         private bool listFileSelected = false,
             folderSelected = false;
+        private string[] lines;
 
         public Form1()
         {
@@ -21,15 +15,17 @@ namespace IMDB.list_file_Converter
         }
 
         private void browseListFileButton_Click(object sender, EventArgs e) {
+            openFileDialog1.Filter = @"list Files (*.list)|*.list";
             DialogResult result = openFileDialog1.ShowDialog();
             if(result == DialogResult.OK) {
+                Cursor.Current = Cursors.WaitCursor;
                 listFileSelected = true;
                 browseListFileLabel.Text = openFileDialog1.FileName;
 
-                string[] lines = File.ReadAllLines(openFileDialog1.FileName);
-
+                lines = File.ReadAllLines(openFileDialog1.FileName);
 
                 startButton.Enabled = listFileSelected && folderSelected;
+                Cursor.Current = Cursors.Default;
             } else {
                 listFileSelected = false;
                 startButton.Enabled = false;
@@ -51,7 +47,13 @@ namespace IMDB.list_file_Converter
 
         private void startButton_Click(object sender, EventArgs e)
         {
-
+            Cursor.Current = Cursors.WaitCursor;
+            try {
+                Program.WriteSqlFile(lines, folderBrowserDialog1.SelectedPath);
+            } catch(Exception exception) {
+                MessageBox.Show(exception.GetType().Name + ": " + exception.Message);
+            }
+            Cursor.Current = Cursors.Default;
         }
     }
 }
