@@ -48,11 +48,11 @@ namespace IMDB.list_file_Converter
         private void startButton_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            try {
+            //try {
                 Program.WriteSqlFile(lines, folderBrowserDialog1.SelectedPath);
-            } catch(Exception exception) {
-                MessageBox.Show(exception.GetType().Name + ": " + exception.Message);
-            }
+            //} catch(Exception exception) {
+            //    MessageBox.Show(exception.GetType().Name + ": " + exception.Message);
+            //}
             Cursor.Current = Cursors.Default;
         }
     }

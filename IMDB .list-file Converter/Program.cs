@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -31,21 +32,23 @@ namespace IMDB.list_file_Converter
 
             int i = 0;
             foreach (string line in lines) {
-                if(line.StartsWith("\"")) {
-                    sql[i-1] = sql[i-1].Substring(0, sql[i-1].Length - 3) + "1);";
-                    sql.Add("insert into imdb (Name, Year, EpisodeName, Season, Episode, IsSeries) values ('" +
-                            regexName.Match(line).Value.Replace("\"", "") + "', " +
-                            regexYear.Match(line).Value + ", '" +
-                            regexEpisodeName.Match(line).Value.Replace("{", "").Trim() + "', " +
+                if(line.StartsWith('"'.ToString()) && regexSeason.Match(line).Value != string.Empty) {
+                    //if(sql.Count > 0) sql[sql.Count-1] = sql[sql.Count-1].Substring(0, sql[sql.Count-1].Length - 3) + "1);";
+                    string year = regexYear.Match(line).Value;
+                    sql.Add("insert into imdb (Name, " + (year == string.Empty ? "" : "Year, ") + "EpisodeName, Season, Episode, IsSeries) values ('" +
+                            regexName.Match(line).Value.Replace("\"", "").Replace("'", "´") + "', " +
+                            (year == string.Empty ? "'" : year + ", '") +
+                            regexEpisodeName.Match(line).Value.Replace("{", "").Trim().Replace("'", "´") + "', " +
                             regexSeason.Match(line).Value.Replace("(#", "") + ", " +
                             regexEpisode.Match(line).Value.Replace(")}", "").Replace(".", "") + ", 1);");
                 } else {
-                    if(i < 16) continue;
-                    sql.Add("insert into imdb (Name, Year, IsSeries) values ('" +
-                            regexMovieName.Match(line).Value.Trim() + "', " +
-                            regexYear.Match(line).Value + ", 0);");
+                    if(i++ < 15) continue;
+                    string year = regexYear.Match(line).Value;
+                    sql.Add("insert into imdb (Name, " + (year == string.Empty ? "" : "Year ,") + "IsSeries) values ('" +
+                            regexMovieName.Match(line).Value.Trim().Replace("'", "´") +
+                            (year == string.Empty ? "'" : "', " + year) + ", " +
+                            (line.StartsWith('"'.ToString()) ? 1 : 0) + ");");
                 }
-                i++;
             }
             return sql;
         }
