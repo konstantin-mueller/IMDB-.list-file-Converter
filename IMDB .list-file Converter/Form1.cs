@@ -65,7 +65,7 @@ namespace IMDB.list_file_Converter
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                Program.WriteSqlFile(lines, folderBrowserDialog1.SelectedPath);
+                Program.WriteSqlFile(databaseNameTextbox.Text, lines, folderBrowserDialog1.SelectedPath);
             }
             catch (Exception exception)
             {
