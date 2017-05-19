@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -33,7 +32,6 @@ namespace IMDB.list_file_Converter
             int i = 0;
             foreach (string line in lines) {
                 if(line.StartsWith('"'.ToString()) && regexSeason.Match(line).Value != string.Empty) {
-                    //if(sql.Count > 0) sql[sql.Count-1] = sql[sql.Count-1].Substring(0, sql[sql.Count-1].Length - 3) + "1);";
                     string year = regexYear.Match(line).Value;
                     sql.Add("insert into imdb (Name, " + (year == string.Empty ? "" : "Year, ") + "EpisodeName, Season, Episode, IsSeries) values ('" +
                             regexName.Match(line).Value.Replace("\"", "").Replace("'", "´") + "', " +

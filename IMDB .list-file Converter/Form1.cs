@@ -5,8 +5,7 @@ using System.Windows.Forms;
 namespace IMDB.list_file_Converter
 {
     public partial class Form1 : Form {
-        private bool listFileSelected = false,
-            folderSelected = false;
+        private bool listFileSelected, folderSelected, databaseNameEntered;
         private string[] lines;
 
         public Form1()
@@ -24,9 +23,9 @@ namespace IMDB.list_file_Converter
 
                 lines = File.ReadAllLines(openFileDialog1.FileName);
 
-                startButton.Enabled = listFileSelected && folderSelected;
+                ToggleStartButton();
                 Cursor.Current = Cursors.Default;
-            } else {
+            } else if(browseListFileLabel.Text == string.Empty) {
                 listFileSelected = false;
                 startButton.Enabled = false;
             }
@@ -38,22 +37,46 @@ namespace IMDB.list_file_Converter
                 folderSelected = true;
                 browseFolderLabel.Text = folderBrowserDialog1.SelectedPath;
 
-                startButton.Enabled = listFileSelected && folderSelected;
-            } else {
+                ToggleStartButton();
+            } else if(browseFolderLabel.Text == string.Empty) {
                 folderSelected = false;
                 startButton.Enabled = false;
             }
         }
 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 about = new AboutBox1();
+            about.Show();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void databaseNameTextbox_TextChanged(object sender, EventArgs e) {
+            databaseNameEntered = databaseNameTextbox.Text != string.Empty;
+            ToggleStartButton();
+        }
+
         private void startButton_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            //try {
+            try
+            {
                 Program.WriteSqlFile(lines, folderBrowserDialog1.SelectedPath);
-            //} catch(Exception exception) {
-            //    MessageBox.Show(exception.GetType().Name + ": " + exception.Message);
-            //}
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.GetType().Name + ": " + exception.Message);
+            }
             Cursor.Current = Cursors.Default;
+        }
+
+
+        private void ToggleStartButton() {
+            startButton.Enabled = listFileSelected && folderSelected && databaseNameEntered;
         }
     }
 }
