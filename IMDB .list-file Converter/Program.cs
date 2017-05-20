@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -17,7 +18,7 @@ namespace IMDB.list_file_Converter
         }
 
         public static void WriteSqlFile(string databaseName, IEnumerable<string> lines, string sqlFilePath) {
-            File.WriteAllLines(sqlFilePath + "\\" + DateTime.Now.ToString().Replace(":", ".") + ".sql", GetSqlFrom(lines, databaseName));
+            File.WriteAllLines(sqlFilePath + "\\" + DateTime.Now.ToString().Replace(":", ".") + ".sql", GetSqlFrom(lines, databaseName), Encoding.UTF8);
         }
 
         private static IEnumerable<string> GetSqlFrom(IEnumerable<string> lines, string databaseName) {
@@ -31,21 +32,34 @@ namespace IMDB.list_file_Converter
 
             int i = 0;
             foreach (string line in lines) {
+                if(line.Contains("-------------")) {
+                    continue;
+                }
+
                 if(line.StartsWith('"'.ToString()) && regexSeason.Match(line).Value != string.Empty) {
                     string year = regexYear.Match(line).Value;
-                    sql.Add("insert into " + databaseName + " (Name, " + (year == string.Empty ? "" : "Year, ") + "EpisodeName, Season, Episode, IsSeries) values ('" +
-                            regexName.Match(line).Value.Replace("\"", "").Replace("'", "´") + "', " +
-                            (year == string.Empty ? "'" : year + ", '") +
-                            regexEpisodeName.Match(line).Value.Replace("{", "").Trim().Replace("'", "´") + "', " +
-                            regexSeason.Match(line).Value.Replace("(#", "") + ", " +
-                            regexEpisode.Match(line).Value.Replace(")}", "").Replace(".", "") + ", 1);");
+                    sql.Add("insert into " + databaseName +
+                        " (" + Properties.Settings.Default.SeriesNameColumn + ", " +
+                        (year == string.Empty ? "" : Properties.Settings.Default.SeriesYearColumn + ", ") +
+                        Properties.Settings.Default.EpisodeNameColumn + ", " +
+                        Properties.Settings.Default.SeasonColumn + ", " +
+                        Properties.Settings.Default.EpisodeColumn + ", " +
+                        Properties.Settings.Default.IsSeriesColumn + ") values ('" +
+                        regexName.Match(line).Value.Replace("\"", "").Replace("'", "´") + "', " +
+                        (year == string.Empty ? "'" : year + ", '") +
+                        regexEpisodeName.Match(line).Value.Replace("{", "").Trim().Replace("'", "´") + "', " +
+                        regexSeason.Match(line).Value.Replace("(#", "") + ", " +
+                        regexEpisode.Match(line).Value.Replace(")}", "").Replace(".", "") + ", 1);");
                 } else {
                     if(i++ < 15) continue;
                     string year = regexYear.Match(line).Value;
-                    sql.Add("insert into " + databaseName + " (Name, " + (year == string.Empty ? "" : "Year ,") + "IsSeries) values ('" +
-                            regexMovieName.Match(line).Value.Trim().Replace("'", "´") +
-                            (year == string.Empty ? "'" : "', " + year) + ", " +
-                            (line.StartsWith('"'.ToString()) ? 1 : 0) + ");");
+                    sql.Add("insert into " + databaseName +
+                        " (" + Properties.Settings.Default.MovieNameColumn + ", " +
+                        (year == string.Empty ? "" : Properties.Settings.Default.MovieYearColumn + ", ") +
+                        Properties.Settings.Default.IsSeriesColumn + ") values ('" +
+                        regexMovieName.Match(line).Value.Trim().Replace("'", "´") +
+                        (year == string.Empty ? "'" : "', " + year) + ", " +
+                        (line.StartsWith('"'.ToString()) ? 1 : 0) + ");");
                 }
             }
             return sql;

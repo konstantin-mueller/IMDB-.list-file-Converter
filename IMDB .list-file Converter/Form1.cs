@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace IMDB.list_file_Converter
@@ -21,7 +22,7 @@ namespace IMDB.list_file_Converter
                 listFileSelected = true;
                 browseListFileLabel.Text = openFileDialog1.FileName;
 
-                lines = File.ReadAllLines(openFileDialog1.FileName);
+                lines = File.ReadAllLines(openFileDialog1.FileName, Encoding.UTF8);
 
                 ToggleStartButton();
                 Cursor.Current = Cursors.Default;
@@ -58,6 +59,12 @@ namespace IMDB.list_file_Converter
         private void databaseNameTextbox_TextChanged(object sender, EventArgs e) {
             databaseNameEntered = databaseNameTextbox.Text != string.Empty;
             ToggleStartButton();
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OptionsForm options = new OptionsForm();
+            options.ShowDialog();
         }
 
         private void startButton_Click(object sender, EventArgs e)

@@ -8,20 +8,114 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IMDB.list_file_Converter.Properties
-{
-
-
+namespace IMDB.list_file_Converter.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
+        
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Name")]
+        public string MovieNameColumn {
+            get {
+                return ((string)(this["MovieNameColumn"]));
+            }
+            set {
+                this["MovieNameColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Year")]
+        public string MovieYearColumn {
+            get {
+                return ((string)(this["MovieYearColumn"]));
+            }
+            set {
+                this["MovieYearColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Name")]
+        public string SeriesNameColumn {
+            get {
+                return ((string)(this["SeriesNameColumn"]));
+            }
+            set {
+                this["SeriesNameColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Year")]
+        public string SeriesYearColumn {
+            get {
+                return ((string)(this["SeriesYearColumn"]));
+            }
+            set {
+                this["SeriesYearColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EpisodeName")]
+        public string EpisodeNameColumn {
+            get {
+                return ((string)(this["EpisodeNameColumn"]));
+            }
+            set {
+                this["EpisodeNameColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Season")]
+        public string SeasonColumn {
+            get {
+                return ((string)(this["SeasonColumn"]));
+            }
+            set {
+                this["SeasonColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Episode")]
+        public string EpisodeColumn {
+            get {
+                return ((string)(this["EpisodeColumn"]));
+            }
+            set {
+                this["EpisodeColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("IsSeries")]
+        public string IsSeriesColumn {
+            get {
+                return ((string)(this["IsSeriesColumn"]));
+            }
+            set {
+                this["IsSeriesColumn"] = value;
             }
         }
     }

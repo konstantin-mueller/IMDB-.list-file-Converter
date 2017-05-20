@@ -1,7 +1,30 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="IMDB.list_file_Converter.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MovieNameColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Name</Value>
+    </Setting>
+    <Setting Name="MovieYearColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Year</Value>
+    </Setting>
+    <Setting Name="SeriesNameColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Name</Value>
+    </Setting>
+    <Setting Name="SeriesYearColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Year</Value>
+    </Setting>
+    <Setting Name="EpisodeNameColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EpisodeName</Value>
+    </Setting>
+    <Setting Name="SeasonColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Season</Value>
+    </Setting>
+    <Setting Name="EpisodeColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Episode</Value>
+    </Setting>
+    <Setting Name="IsSeriesColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">IsSeries</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
