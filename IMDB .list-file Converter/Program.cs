@@ -18,7 +18,7 @@ namespace IMDB.list_file_Converter
         }
 
         public static void WriteSqlFile(string databaseName, IEnumerable<string> lines, string sqlFilePath) {
-            File.WriteAllLines(sqlFilePath + "\\" + DateTime.Now.ToString().Replace(":", ".") + ".sql", GetSqlFrom(lines, databaseName), Encoding.UTF8);
+            File.WriteAllLines(sqlFilePath + "\\" + DateTime.Now.ToString("d/MM/yyyy hh.mm.ss") + ".sql", GetSqlFrom(lines, databaseName), Encoding.Default);
         }
 
         private static IEnumerable<string> GetSqlFrom(IEnumerable<string> lines, string databaseName) {

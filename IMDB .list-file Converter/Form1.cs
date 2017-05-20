@@ -22,7 +22,7 @@ namespace IMDB.list_file_Converter
                 listFileSelected = true;
                 browseListFileLabel.Text = openFileDialog1.FileName;
 
-                lines = File.ReadAllLines(openFileDialog1.FileName, Encoding.UTF8);
+                lines = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
 
                 ToggleStartButton();
                 Cursor.Current = Cursors.Default;
@@ -45,12 +45,6 @@ namespace IMDB.list_file_Converter
             }
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AboutBox1 about = new AboutBox1();
-            about.Show();
-        }
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -61,10 +55,16 @@ namespace IMDB.list_file_Converter
             ToggleStartButton();
         }
 
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             OptionsForm options = new OptionsForm();
             options.ShowDialog();
+        }
+
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            AboutBox1 about = new AboutBox1();
+            about.ShowDialog();
         }
 
         private void startButton_Click(object sender, EventArgs e)
