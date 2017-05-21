@@ -4,3 +4,5 @@ This program converts the movies.list file from IMDB to a .sql file. Just type i
 In the options (File -> Options) you can specify the column names of your database. If you do not do that default names will be used.
 
 Just click the Start button after you configured everything. It takes a couple of seconds and about 2 GB RAM because the movies.list file is quite big. Because of that it probably runs only on 64bit systems.
+
+You can get the latest movies.list file from IMDB: http://www.imdb.com/interfaces
